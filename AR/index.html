@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>AR物件測試 - 博物館風格</title>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <script defer="defer" src="model_viewer.js"></script>
+    <link href="model_viewer.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #2b2b2b;
+            color: #f0f0f0;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #f0f0f0;
+            border: 2px solid #f0f0f0;
+            border-radius: 5px;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        #left-arrow {
+            left: 2vw;
+        }
+        #right-arrow {
+            right: 2vw;
+        }
+        model-viewer {
+            width: 80%;
+            height: 80%;
+            border: 5px solid #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        p {
+            position: absolute;
+            top: 10px; /* 移動到上部 */
+            left: 50%;
+            transform: translateX(-50%);
+            color: #f0f0f0;
+            background-color: rgba(0, 0, 0, 0.7); /* 背景色加深 */
+            padding: 10px 20px; /* 增加填充 */
+            border-radius: 5px;
+            font-size: 1.5rem; /* 放大字體 */
+            font-weight: bold; /* 加粗 */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <p>AR物件測試 - 博物館展示</p>
+        <model-viewer id="model-viewer" alt="QMIMI" src="model/vase.glb" ar environment-image="studio2k.hdr" poster="images/mvt.png" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
+        <button id="left-arrow" class="arrow">&larr;</button>
+        <button id="right-arrow" class="arrow">&rarr;</button>
+    </div>
+    <script>
+        const models = ['model/vase.glb', 'model/a1.glb', 'model/a2new3.glb'];
+        let currentIndex = 0;
+
+        const modelViewer = document.getElementById('model-viewer');
+        const leftArrow = document.getElementById('left-arrow');
+        const rightArrow = document.getElementById('right-arrow');
+
+        leftArrow.addEventListener('click', () => {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : models.length - 1;
+            modelViewer.src = models[currentIndex];
+        });
+
+        rightArrow.addEventListener('click', () => {
+            currentIndex = (currentIndex < models.length - 1) ? currentIndex + 1 : 0;
+            modelViewer.src = models[currentIndex];
+        });
+    </script>
+</body>
+</html>
