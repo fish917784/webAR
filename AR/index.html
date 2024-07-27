@@ -53,15 +53,15 @@
         }
         p {
             position: absolute;
-            top: 10px; /* 移動到上部 */
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             color: #f0f0f0;
-            background-color: rgba(0, 0, 0, 0.7); /* 背景色加深 */
-            padding: 10px 20px; /* 增加填充 */
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
             border-radius: 5px;
-            font-size: 1.5rem; /* 放大字體 */
-            font-weight: bold; /* 加粗 */
+            font-size: 1.5rem;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -82,12 +82,12 @@
 
         leftArrow.addEventListener('click', () => {
             currentIndex = (currentIndex > 0) ? currentIndex - 1 : models.length - 1;
-            modelViewer.src = models[currentIndex];
+            modelViewer.setAttribute('src', models[currentIndex]);
         });
 
         rightArrow.addEventListener('click', () => {
             currentIndex = (currentIndex < models.length - 1) ? currentIndex + 1 : 0;
-            modelViewer.src = models[currentIndex];
+            modelViewer.setAttribute('src', models[currentIndex]);
         });
     </script>
 </body>
