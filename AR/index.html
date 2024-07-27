@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <title>AR物件測試 - 博物館風格</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-    <script defer="defer" src="model_viewer.js"></script>
     <link href="model_viewer.css" rel="stylesheet">
     <style>
         body {
@@ -51,17 +50,31 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
+        #loading-bar-container {
+            position: absolute;
+            bottom: 20px;
+            width: 80%;
+            height: 10px;
+            background-color: #444;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        #loading-bar {
+            width: 0;
+            height: 100%;
+            background-color: #76c7c0;
+        }
         p {
             position: absolute;
-            top: 10px; /* 移動到上部 */
+            top: 10px;
             left: 50%;
             transform: translateX(-50%);
             color: #f0f0f0;
-            background-color: rgba(0, 0, 0, 0.7); /* 背景色加深 */
-            padding: 10px 20px; /* 增加填充 */
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 20px;
             border-radius: 5px;
-            font-size: 1.5rem; /* 放大字體 */
-            font-weight: bold; /* 加粗 */
+            font-size: 1.5rem;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -69,16 +82,29 @@
     <div id="container">
         <p>AR物件測試 - 博物館展示</p>
         <model-viewer id="model-viewer" alt="QMIMI" src="model/vase.glb" ar environment-image="studio2k.hdr" poster="images/mvt.png" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
+        <div id="loading-bar-container">
+            <div id="loading-bar"></div>
+        </div>
         <button id="left-arrow" class="arrow">&larr;</button>
         <button id="right-arrow" class="arrow">&rarr;</button>
     </div>
     <script>
-        const models = ['AR/model/vase.glb'];
+        const models = ['model/vase.glb'];
         let currentIndex = 0;
 
         const modelViewer = document.getElementById('model-viewer');
+        const loadingBar = document.getElementById('loading-bar');
         const leftArrow = document.getElementById('left-arrow');
         const rightArrow = document.getElementById('right-arrow');
+
+        modelViewer.addEventListener('progress', (event) => {
+            const progress = event.detail.totalProgress;
+            loadingBar.style.width = `${progress * 100}%`;
+        });
+
+        modelViewer.addEventListener('load', () => {
+            loadingBar.style.width = '0';
+        });
 
         leftArrow.addEventListener('click', () => {
             currentIndex = (currentIndex > 0) ? currentIndex - 1 : models.length - 1;

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- 指定文档的字符编码为 UTF-8，确保正确显示多语言字符 -->
+    <meta charset="UTF-8">
+    <!-- 设置视口以适应移动设备，宽度为设备宽度，初始缩放比例为 1，禁止用户缩放 -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <!-- 网页的标题，会显示在浏览器标签或窗口标题中 -->
+    <title>AR博物館</title>
+    <!-- 引入 Model-Viewer 库，用于在网页中展示和操作 3D 模型 -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <!-- 链接到外部的 CSS 样式文件，用于定义网页的样式 -->
+    <link href="css/model_viewer.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Model-Viewer 元素，显示 3D 模型的 Web 组件 -->
+    <model-viewer id="model-viewer" alt="QMIMI" src="models/vase.glb" ar environment-image="studio2k.hdr" poster="images/mvt.png" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
+    <!-- 一个简单的文本段落，显示在屏幕的底部左侧 -->
+    <p style="position: absolute; bottom: 6vw; left: 6vw;">AR博物館</p>
+    <!-- 引入自定义的 JavaScript 文件，通常用于附加的功能或逻辑 -->
+    <script defer src="js/model_viewer.js"></script>
+</body>
+</html>
